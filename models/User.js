@@ -42,8 +42,23 @@ userSchema.virtual("friendCount").get(function () {
   return this.friends.length;
 });
 
-// Create the User model using the User Schema
+// Define the model using the User Schema
 const User = model("User", userSchema);
 
 // Export the User model
 module.exports = User;
+
+User.find({})
+  .exec()
+  .then(async (collection) => {
+    if (collection.length === 0) {
+      const results = await User.insertMany([
+        { username: "user1", email: "email1@gmail.com" },
+        { username: "user2", email: "email2@gmail.com" },
+        { username: "user3", email: "email3@gmail.com" },
+      ]);
+      return console.log("Users inserted", results);
+    }
+    return console.log("Already populated");
+  })
+  .catch((err) => handleError(err));

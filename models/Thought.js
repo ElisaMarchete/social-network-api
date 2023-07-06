@@ -1,5 +1,6 @@
 // Define Mongoose
 const { Schema, model } = require("mongoose");
+const reactionSchema = require("./Reaction");
 
 // Define the Thought Schema
 const thoughtSchema = new Schema(
@@ -20,7 +21,7 @@ const thoughtSchema = new Schema(
       type: String,
       require: true,
     },
-    // Array of nested reaction sub-documents
+    // Array of nested reaction sub-documents -> one-to-many relationship
     reactions: [reactionSchema],
   },
   {
@@ -42,8 +43,16 @@ thoughtSchema.virtual("reactionCount").get(function () {
   return this.reactions.length;
 });
 
-// Create the User model using the User Schema
+// Define the model using the thought Schema
 const Thought = model("Thought", thoughtSchema);
 
 // Export the User model
 module.exports = Thought;
+
+// New document creation
+// Thought.create({
+//   thoughtText: "Here's a cool thought...",
+//   username: "lernantino",
+// })
+//   .then((result) => console.log(result))
+//   .catch((err) => console.log(err));

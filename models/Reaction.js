@@ -20,6 +20,7 @@ const reactionSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
+      get: date,
     },
   },
   {
@@ -29,6 +30,11 @@ const reactionSchema = new Schema(
     id: false,
   }
 );
+
+// function to format the date string from the createdAt field using the date getter
+function date(createdAt) {
+  return createdAt.toDateString();
+}
 
 // Export the User model
 module.exports = reactionSchema;
