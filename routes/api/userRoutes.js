@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const {
   getAllUsers,
-  getUserById,
+  getSingleUser,
   createUser,
   updateUser,
   deleteUser,
@@ -10,7 +10,7 @@ const {
 // http://localhost:3001/api/users
 router.route("/").get(getAllUsers).post(createUser);
 
-// http://localhost:3001/api/users/:userId
-router.route("/:userId").get(getUserById).put(updateUser).delete(deleteUser);
+// http://localhost:3001/api/users/:id
+router.route("/:id").get(getSingleUser).put(updateUser).delete(deleteUser);
 
 module.exports = router;
