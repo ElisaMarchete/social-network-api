@@ -36,5 +36,17 @@ function date(createdAt) {
   return createdAt.toDateString();
 }
 
+// seeding data for sub-documents
+const ReactionData = [
+  {
+    reactionBody: "This is a reaction!",
+    username: "Elisa Test 1",
+  },
+  {
+    reactionBody: "This is another reaction!",
+    username: "Elisa Test 2",
+  },
+];
+
 // Export the User model
-module.exports = reactionSchema;
+module.exports = { reactionSchema, ReactionData };

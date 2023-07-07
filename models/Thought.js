@@ -1,6 +1,6 @@
 // Define Mongoose
 const { Schema, model } = require("mongoose");
-const reactionSchema = require("./Reaction");
+const { reactionSchema, ReactionData } = require("./Reaction");
 
 // Define the Thought Schema
 const thoughtSchema = new Schema(
@@ -49,10 +49,11 @@ const Thought = model("Thought", thoughtSchema);
 // Export the User model
 module.exports = Thought;
 
-// New document creation
-// Thought.create({
-//   thoughtText: "Here's a cool thought...",
-//   username: "lernantino",
-// })
-//   .then((result) => console.log(result))
-//   .catch((err) => console.log(err));
+// Seeding data base and sub-documents
+Thought.create({
+  thoughtText: "This is a thought!",
+  username: "Elisa Test 1",
+  reactions: ReactionData,
+})
+  .then((data) => console.log(data))
+  .catch((err) => console.error(err));

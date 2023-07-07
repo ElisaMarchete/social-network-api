@@ -42,7 +42,7 @@ app.post("/new-user", async (req, res) => {
   }
 });
 
-// Delete a user by its _id
+// Delete a user by its _id **Remove a user's associated thoughts when deleted.**
 app.delete("/delete-user/:id", async (req, res) => {
   try {
     const deletedUser = await User.findOneAndDelete({ _id: req.params.id });
@@ -65,16 +65,6 @@ app.put("/update-user/:id", async (req, res) => {
     res.status(500).send({ message: "Something went wrong!" });
   }
 });
-
-// // Get all thoughts
-// app.get("/all-thoughts", async (req, res) => {
-//   try {
-//     const users = await Thought.find({});
-//     res.status(200).json(users);
-//   } catch (err) {
-//     res.status(500).send({ message: "Something went wrong!" });
-//   }
-// });
 
 // Start the express server
 db.once("open", () => {
