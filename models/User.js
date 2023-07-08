@@ -47,28 +47,3 @@ const User = model("user", userSchema);
 
 // Export the User model
 module.exports = User;
-
-// User.find({})
-//   .exec()
-//   .then(async (collection) => {
-//     if (collection.length === 0) {
-//       const results = await User.insertMany([
-//         { username: "user1", email: "email1@gmail.com" },
-//         { username: "user2", email: "email2@gmail.com" },
-//         { username: "user3", email: "email3@gmail.com" },
-//       ]);
-//       return console.log("Users inserted", results);
-//     }
-//     return console.log("Already populated");
-//   })
-//   .catch((err) => handleError(err));
-
-// {
-//   "_id": "64a827a91eea9ee639580e66",
-//   "username": "user1",
-//   "email": "email1@gmail.com",
-//   "thoughts": [],
-//   "friends": [],
-//   "__v": 0,
-//   "friendCount": 0
-// },

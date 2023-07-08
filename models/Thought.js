@@ -48,22 +48,3 @@ const Thought = model("thought", thoughtSchema);
 
 // Export the User model
 module.exports = Thought;
-
-// Seeding data base and sub-documents
-// Thought.create({
-//   thoughtText: "This is a thought!",
-//   username: "Elisa Test 1",
-//   reactions: reactionData,
-// })
-//   .then((data) => console.log(data))
-//   .catch((err) => console.error(err));
-
-// {
-//   "_id": "64a70d94368ed841c9248a2a",
-//   "thoughtText": "Here's a cool thought...",
-//   "username": "lernantino",
-//   "createdAt": "Thu Jul 06 2023",
-//   "reactions": [],
-//   "__v": 0,
-//   "reactionCount": 0
-// },
