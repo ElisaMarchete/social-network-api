@@ -37,7 +37,7 @@ function date(createdAt) {
 }
 
 // seeding data for sub-documents
-const ReactionData = [
+const reactionData = [
   {
     reactionBody: "This is a reaction!",
     username: "Elisa Test 1",
@@ -49,4 +49,4 @@ const ReactionData = [
 ];
 
 // Export the User model
-module.exports = { reactionSchema, ReactionData };
+module.exports = { reactionSchema, reactionData };

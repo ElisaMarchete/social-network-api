@@ -10,10 +10,13 @@ module.exports = {
       res.status(500).send({ message: "Something went wrong!" });
     }
   },
-  // Get a single user by its _id  ** POPULATE (populated thought and friend data) **
+  // Get a single user by id
   async getSingleUser(req, res) {
     try {
-      const singleUser = await User.findOne({ _id: req.params.id });
+      const singleUser = await User.findOne({ _id: req.params.id })
+        .populate("thoughts")
+        .populate("friends");
+
       if (!singleUser) {
         return res.status(404).json({ message: "No user with this id!" });
       }
@@ -31,7 +34,7 @@ module.exports = {
       res.status(500).send({ message: "Something went wrong!" });
     }
   },
-  // Update a user by its _id
+  // Update a user by id
   async updateUser(req, res) {
     try {
       const updatedUser = await User.findOneAndUpdate(
@@ -47,7 +50,7 @@ module.exports = {
       res.status(500).send({ message: "Something went wrong!" });
     }
   },
-  // Delete a user by its _id
+  // Delete a user by id **Remove a user's associated thoughts when deleted.**
   async deleteUser(req, res) {
     try {
       const deletedUser = await User.findOneAndDelete({ _id: req.params.id });

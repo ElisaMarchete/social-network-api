@@ -1,6 +1,6 @@
 // Define Mongoose
 const { Schema, model } = require("mongoose");
-const { reactionSchema, ReactionData } = require("./Reaction");
+// const { reactionSchema, reactionData } = require("./Reaction");
 
 // Define the Thought Schema
 const thoughtSchema = new Schema(
@@ -22,7 +22,7 @@ const thoughtSchema = new Schema(
       require: true,
     },
     // Array of nested reaction sub-documents -> one-to-many relationship
-    reactions: [reactionSchema],
+    // reactions: [reactionSchema],
   },
   {
     toJSON: {
@@ -39,21 +39,31 @@ function date(createdAt) {
 }
 
 // Create a virtual called friendCount that retrieves the length of the user's friends array field on query
-thoughtSchema.virtual("reactionCount").get(function () {
-  return this.reactions.length;
-});
+// thoughtSchema.virtual("reactionCount").get(function () {
+//   return this.reactions.length;
+// });
 
 // Define the model using the thought Schema
-const Thought = model("Thought", thoughtSchema);
+const Thought = model("thought", thoughtSchema);
 
 // Export the User model
 module.exports = Thought;
 
 // Seeding data base and sub-documents
-Thought.create({
-  thoughtText: "This is a thought!",
-  username: "Elisa Test 1",
-  reactions: ReactionData,
-})
-  .then((data) => console.log(data))
-  .catch((err) => console.error(err));
+// Thought.create({
+//   thoughtText: "This is a thought!",
+//   username: "Elisa Test 1",
+//   reactions: reactionData,
+// })
+//   .then((data) => console.log(data))
+//   .catch((err) => console.error(err));
+
+// {
+//   "_id": "64a70d94368ed841c9248a2a",
+//   "thoughtText": "Here's a cool thought...",
+//   "username": "lernantino",
+//   "createdAt": "Thu Jul 06 2023",
+//   "reactions": [],
+//   "__v": 0,
+//   "reactionCount": 0
+// },
