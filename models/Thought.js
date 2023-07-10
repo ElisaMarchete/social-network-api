@@ -1,6 +1,6 @@
 // Define Mongoose
 const { Schema, model } = require("mongoose");
-// const { reactionSchema, reactionData } = require("./Reaction");
+const { reactionSchema } = require("./Reaction");
 
 // Define the Thought Schema
 const thoughtSchema = new Schema(
@@ -22,7 +22,7 @@ const thoughtSchema = new Schema(
       require: true,
     },
     // Array of nested reaction sub-documents -> one-to-many relationship
-    // reactions: [reactionSchema],
+    reactions: [reactionSchema],
   },
   {
     toJSON: {
@@ -39,9 +39,9 @@ function date(createdAt) {
 }
 
 // Create a virtual called friendCount that retrieves the length of the user's friends array field on query
-// thoughtSchema.virtual("reactionCount").get(function () {
-//   return this.reactions.length;
-// });
+thoughtSchema.virtual("reactionCount").get(function () {
+  return this.reactions.length;
+});
 
 // Define the model using the thought Schema
 const Thought = model("thought", thoughtSchema);

@@ -77,4 +77,38 @@ module.exports = {
       res.status(500).send({ message: "Something went wrong!" });
     }
   },
+
+  // Add a reaction to a thought
+  async addReaction(req, res) {
+    try {
+      const updatedThought = await Thought.findOneAndUpdate(
+        { _id: req.params.id },
+        { $push: { reactions: req.body } },
+        { new: true }
+      );
+      if (!updatedThought) {
+        return res.status(404).json({ message: "No thought with this id!" });
+      }
+      res.json({ message: "Reaction added!" });
+    } catch (err) {
+      res.status(500).send({ message: "Something went wrong!" });
+    }
+  },
+
+  // Remove a reaction from a thought
+  async deleteReaction(req, res) {
+    try {
+      const updatedThought = await Thought.findOneAndUpdate(
+        { _id: req.params.id },
+        { $pull: { reactions: { reactionId: req.params.reactionId } } },
+        { new: true }
+      );
+      if (!updatedThought) {
+        return res.status(404).json({ message: "No thought with this id!" });
+      }
+      res.json({ message: "Reaction deleted!" });
+    } catch (err) {
+      res.status(500).send({ message: "Something went wrong!" });
+    }
+  },
 };
