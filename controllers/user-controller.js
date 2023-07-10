@@ -4,7 +4,7 @@ module.exports = {
   // Get all users
   async getAllUsers(req, res) {
     try {
-      const users = await User.find({});
+      const users = await User.find({}).select("-__v");
       res.status(200).json(users);
     } catch (err) {
       res.status(500).send({ message: "Something went wrong!" });
@@ -78,6 +78,22 @@ module.exports = {
         return res.status(404).json({ message: "No user with this id!" });
       }
       res.json(updatedUser);
+    } catch (err) {
+      res.status(500).send({ message: "Something went wrong!" });
+    }
+  },
+
+  // Delete a friend
+  async deleteFriend(req, res) {
+    try {
+      const updatedUser = await User.findOneAndUpdate(
+        { _id: req.params.id },
+        { $pull: { friends: req.params.friendId } }
+      );
+      if (!updatedUser) {
+        return res.status(404).json({ message: "No user with this id!" });
+      }
+      res.json({ message: "Friend deleted!" });
     } catch (err) {
       res.status(500).send({ message: "Something went wrong!" });
     }
