@@ -50,14 +50,14 @@ module.exports = {
       res.status(500).send({ message: "Something went wrong!" });
     }
   },
-  // Delete a user by id **Remove a user's associated thoughts when deleted.**
+  // Delete a user by id and associated thoughts
   async deleteUser(req, res) {
     try {
       const deletedUser = await User.findOneAndDelete({ _id: req.params.id });
       if (!deletedUser) {
         return res.status(404).json({ message: "No user with this id!" });
       }
-      const deletedThoughts = await Thought.deleteMany({
+      await Thought.deleteMany({
         _id: { $in: deletedUser.thoughts },
       });
       res.json(deletedUser);

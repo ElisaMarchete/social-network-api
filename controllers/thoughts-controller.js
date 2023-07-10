@@ -55,8 +55,9 @@ module.exports = {
       res.status(500).send({ message: "Something went wrong!" });
     }
   },
-  // Delete a thought by id
+  // Delete a thought by id and remove from associated user
   async deleteThought(req, res) {
+    console.log(req);
     try {
       const deletedThought = await Thought.findOneAndDelete({
         _id: req.params.id,
@@ -64,6 +65,13 @@ module.exports = {
       if (!deletedThought) {
         return res.status(404).json({ message: "No thought with this id!" });
       }
+
+      const user = await User.findOneAndUpdate(
+        { thoughts: req.params.id },
+        { $pull: { thoughts: req.params.id } },
+        { new: true }
+      );
+
       res.json(deletedThought);
     } catch (err) {
       res.status(500).send({ message: "Something went wrong!" });
