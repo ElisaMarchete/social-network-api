@@ -72,7 +72,7 @@ module.exports = {
         { new: true }
       );
 
-      res.json(deletedThought);
+      res.json({ message: "Thought deleted!" });
     } catch (err) {
       res.status(500).send({ message: "Something went wrong!" });
     }

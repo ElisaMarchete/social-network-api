@@ -65,4 +65,21 @@ module.exports = {
       res.status(500).send({ message: "Something went wrong!" });
     }
   },
+
+  // Add a new friend
+  async addFriend(req, res) {
+    // console.log(req.params.id, req.params.friendId);
+    try {
+      const updatedUser = await User.findOneAndUpdate(
+        { _id: req.params.id },
+        { $push: { friends: req.params.friendId } }
+      );
+      if (!updatedUser) {
+        return res.status(404).json({ message: "No user with this id!" });
+      }
+      res.json(updatedUser);
+    } catch (err) {
+      res.status(500).send({ message: "Something went wrong!" });
+    }
+  },
 };
