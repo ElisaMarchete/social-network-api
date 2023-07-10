@@ -22,7 +22,7 @@ module.exports = {
       res.status(500).send({ message: "Something went wrong!" });
     }
   },
-  // Create a new thought **don't forget to push the created thought's _id to the associated user's thoughts array field**
+  // Create a new thought
   async createThought(req, res) {
     try {
       const newThought = await Thought.create(req.body);
@@ -34,7 +34,7 @@ module.exports = {
       if (!user) {
         return res.status(404).json({ message: "No user with this id!" });
       }
-      res.json(newThought);
+      res.json("You have created a thought 🎉");
     } catch (err) {
       res.status(500).send({ message: "Something went wrong!" });
     }

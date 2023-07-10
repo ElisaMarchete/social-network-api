@@ -16,4 +16,4 @@ db.once("open", () => {
   });
 });
 
-// 39:30 video
+// 1:07 video
