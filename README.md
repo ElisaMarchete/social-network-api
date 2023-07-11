@@ -55,4 +55,4 @@ This project is licensed under the MIT License.
 
 ## Walkthrough Video
 
-[![Walkthrough Video](https://ZM/0.jpg)](https)
+[Link walkthrough video](https://watch.screencastify.com/v/LHxHY2nnSPNgf2e9sEr8)
