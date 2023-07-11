@@ -68,7 +68,23 @@ module.exports = {
 
   // Add a new friend
   async addFriend(req, res) {
-    // console.log(req.params.id, req.params.friendId);
+    const userId = req.params.id;
+    const friendId = req.params.friendId;
+    const user = await User.findById(userId);
+
+    if (userId === friendId) {
+      return res
+        .status(400)
+        .json({ message: "You cannot add yourself as a friend." });
+    }
+
+    if (!user) {
+      return res.status(404).json({ message: "No user with this id!" });
+    }
+
+    if (user.friends.includes(friendId)) {
+      return res.status(400).json({ message: "Friend already added." });
+    }
     try {
       const updatedUser = await User.findOneAndUpdate(
         { _id: req.params.id },

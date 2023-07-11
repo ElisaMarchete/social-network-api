@@ -57,7 +57,6 @@ module.exports = {
   },
   // Delete a thought by id and remove from associated user
   async deleteThought(req, res) {
-    console.log(req);
     try {
       const deletedThought = await Thought.findOneAndDelete({
         _id: req.params.id,
